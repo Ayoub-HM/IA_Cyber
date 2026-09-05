@@ -36,3 +36,41 @@ print(f'Vrais négatifs : {tn}')
 print(f'Faux négatifs  : {fn}')
 print(f'Précision      : {precision:.4f}')
 print(f'Rappel         : {recall:.4f}')
+
+# ---------------------------------------------------
+# 9.1 - Séparation train / test
+# ---------------------------------------------------
+from sklearn.model_selection import train_test_split
+
+features = [
+    'connection_count',
+    'delta_mean_s',
+    'delta_std_s',
+    'delta_cv',
+    'recurrent_ratio',
+    'bytes_out_mean',
+    'bytes_out_cv',
+    'bytes_in_mean',
+    'duration_mean_ms',
+    'packets_out_mean',
+    'tls_ratio',
+    'night_ratio',
+    'unique_ports'
+]
+
+X = df[features]
+y = df['label']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+
+print('\n--- Séparation train/test ---')
+print('X_train shape:', X_train.shape)
+print('X_test shape :', X_test.shape)
+print('y_train shape:', y_train.shape)
+print('y_test shape :', y_test.shape)
